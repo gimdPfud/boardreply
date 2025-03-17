@@ -1,8 +1,8 @@
 package com.example.boardreply.service;
 
 import com.example.boardreply.dto.ReplyDTO;
-import com.example.boardreply.entity.Board;
 import com.example.boardreply.entity.Reply;
+import com.example.boardreply.repository.BoardRepository;
 import com.example.boardreply.repository.ReplyRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -51,5 +51,10 @@ public class ReplyService {
     public void delete(Long rno){
         log.info("들어온 값 : "+rno);
         replyRepository.deleteById(rno);
+    }
+
+    public void deleteReply(Long bno){
+        List<Reply> replyList = replyRepository.findByBoardBno(bno);
+        replyRepository.deleteAll(replyList);
     }
 }
