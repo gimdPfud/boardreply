@@ -2,7 +2,6 @@ package com.example.boardreply.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +20,6 @@ public class Reply {
     private String content;
     private String writer;
 
-    @CreatedDate
     private LocalDateTime regitime;
 
     @ManyToOne(fetch = FetchType.LAZY)

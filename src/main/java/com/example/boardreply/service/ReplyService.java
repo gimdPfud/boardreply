@@ -11,6 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class ReplyService {
     public void register(ReplyDTO replyDTO){
         log.info("들어온 값 : "+replyDTO);
         Reply reply = modelMapper.map(replyDTO, Reply.class);
+        reply.setRegitime(LocalDateTime.now());
         replyRepository.save(reply);
     }
 
