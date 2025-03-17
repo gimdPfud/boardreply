@@ -63,7 +63,7 @@ public class BoardService {
         return boardDTO;
     }
 
-    public void update(BoardDTO boardDTO) {
+    public void edit(BoardDTO boardDTO) {
         log.info("들어온 값 : " + boardDTO);
 
         //pk로 글 찾기
