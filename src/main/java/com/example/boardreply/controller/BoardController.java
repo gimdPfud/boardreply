@@ -34,7 +34,7 @@ public class BoardController {
 
         boardService.register(boardDTO);
 
-        return "redirect:/boardlist";
+        return "redirect:/board/list";
     }
 
     @GetMapping("/list")
