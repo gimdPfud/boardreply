@@ -26,7 +26,7 @@ public class BoardController {
     @GetMapping("/register")
     public String getRegister(){
 
-        return "/register";
+        return "/boardregister";
     }
 
     @PostMapping("/register")
@@ -43,7 +43,7 @@ public class BoardController {
         List<BoardDTO> boardDTOS = boardService.list();
         model.addAttribute("boardDTOS", boardDTOS);
 
-        return "/boardList";
+        return "/boardlist";
     }
 
     @GetMapping("/read/{bno}")
