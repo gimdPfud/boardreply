@@ -24,6 +24,7 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
     private final ModelMapper modelMapper;
+    private final ReplyService replyService;
 
     public void register(BoardDTO boardDTO){
         log.info("들어온 값 : " + boardDTO);
@@ -76,6 +77,7 @@ public class BoardService {
     public void delete(Long bno) {
         log.info("들어온 값 : " + bno);
 
+        replyService.deleteReply(bno);
         boardRepository.deleteById(bno);
 
     }
