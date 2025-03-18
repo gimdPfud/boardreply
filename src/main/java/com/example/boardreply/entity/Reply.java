@@ -17,7 +17,9 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long rno;
 
+    @Column(length = 500)
     private String content;
+    @Column(length = 20)
     private String writer;
 
     private LocalDateTime regitime;
