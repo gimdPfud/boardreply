@@ -1,6 +1,5 @@
 package com.example.boardreply.dto;
 
-import com.example.boardreply.entity.Board;
 import lombok.*;
 
 import java.time.LocalDateTime;
