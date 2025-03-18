@@ -35,9 +35,11 @@ public class ReplyService {
         log.info("들어온 값 : "+bno);
         List<Reply> replyList = replyRepository.findByBoardBno(bno);
         List<ReplyDTO> replyDTOList = new ArrayList<>();
+
         for(Reply reply : replyList){
             ReplyDTO replyDTO = modelMapper.map(reply, ReplyDTO.class);
             replyDTOList.add(replyDTO);
+            log.info("디티오 : {}", replyDTO);
         }
         return replyDTOList;
     }

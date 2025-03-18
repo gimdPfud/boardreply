@@ -54,12 +54,11 @@ public class BoardService {
         log.info("들어온 값 : " + bno);
 
         //entity를 dto로 변환
-        Optional<Board> optionalBoard = boardRepository.findById(bno);
+//        Optional<Board> optionalBoard = boardRepository.findById(bno);
 
-        Board board = optionalBoard.orElseThrow(EntityNotFoundException::new);
+        Board board = boardRepository.findById(bno).orElseThrow(EntityNotFoundException::new);
 
         BoardDTO boardDTO = modelMapper.map(board, BoardDTO.class);
-
         return boardDTO;
     }
 
