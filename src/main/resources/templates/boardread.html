@@ -13,21 +13,90 @@
 <div class="container mt-5">
     <h2 th:text="${boardDTO.title}"></h2>
     <p><strong>작성자:</strong> <span th:text="${boardDTO.writer}"></span></p>
-    <p><strong>작성일:</strong> <span th:text="${#temporals.format(boardDTO.regitime, 'yyyy-MM-dd HH:mm')}"></span></p>
+    <p><strong>작성일:</strong> <span th:text="${boardDTO.regitime}"></span></p>
     <hr>
     <p th:text="${boardDTO.content}" class="border p-3"></p>
     <a th:href="@{/board/edit/{bno}(bno=${boardDTO.bno})}" class="btn btn-warning">수정</a>
     <a th:href="@{/board/delete(bno=${boardDTO.bno})}" class="btn btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
     <a href="/board/list" class="btn btn-secondary">목록으로</a>
+
+    <div class="reply mt-4">
+        <!-- 댓글 제목 & 댓글 작성 버튼 (Collapse) -->
+        <div class="row mb-3">
+            <div class="col-auto"><h3>댓글</h3></div>
+            <div class="col-auto">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#replyInput" aria-expanded="false" aria-controls="replyInput">
+                    댓글 작성
+                </button>
+            </div>
+        </div>
+
+        <!-- 댓글 입력 카드 (Collapse) -->
+        <div class="row">
+            <div class="collapse" id="replyInput">
+                <div class="card card-body">
+                    <div class="mb-3">
+                        <label for="repWriter" class="form-label">작성자</label>
+                        <input type="text" id="repWriter" name="writer" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="repContent" class="form-label">댓글 내용</label>
+                        <textarea name="content" id="repContent" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-success regibtn">댓글 등록</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 댓글 목록 -->
+        <div class="replyList">
+
+        </div>
+    </div>
+
 </div>
 
-<div class="replyList"></div>
+<input hidden readonly id="boardBno" name="boardBno" th:value="${boardDTO.bno}">
 
-<script th:inline="javascript">
-    let bno = [[${boardDTO.bno}]]
+<script>
+
+    let bno = $("#boardBno").val()
+    let regibtn = $(".regibtn")
+
     document.addEventListener("DOMContentLoaded",function () {
         list();
     })
+
+    regibtn.on("click",function () {
+        let bno = $("#boardBno").val()
+        let writer = $("#repWriter").val()
+        let content = $("#repContent").val()
+        // let boardDTO = [[${boardDTO}]]
+        let insertData = {
+            writer : writer,
+            content : content,
+            // boardDTO : boardDTO,
+            bno : bno
+        }
+        register(insertData);
+        location.href=`/board/read/${bno}`
+    })
+
+    function register(insertData) {
+        /*DTO 넘기고 String 받음.*/
+        console.log(insertData)
+        $.ajax({
+            url : "/reply/register",
+            type : "post",
+            data : insertData,
+            success : function (data) {
+                alert(data)
+                location.href=`/board/read/${bno}`
+            },error : function (error) {
+                console.log(error)
+            }
+        })
+    }
 
     function list() {
         /*bno넘겨서 List받기*/
@@ -41,22 +110,43 @@
                 }else{
                     for(let i = 0; i<data.length; i++){
                         str += `<div class="row mt-3">
-                <span class=" rno">${data[i].rno}</span>
-                <span class=" content">${data[i].content}</span>
-                <span class="writer">${data[i].writer}</span>
-                <span class="regitime">${data[i].regitime}</span>
-                <span class="btns">
-                    <button class="btn editbtn">수정</button>
-                    <button class="btn delbtn">삭제</button>
+                <span class="rrno">${data[i].rno}</span>
+                <span class="rcontent">${data[i].content}</span>
+                <span class="rwriter">${data[i].writer}</span>
+                <span class="rregitime">${data[i].regitime}</span>
+                <span class="rbtns">
+                    <button class="btn btn-danger delbtn" value="${data[i].rno}">삭제</button>
                 </span>
             </div>`
                     }
                 }
                 $(".replyList").html(str)
+                $(".delbtn").on("click",function () {
+                    del($(this).val());
+                })
+            },
+            error : function (error) {
+                console.log(error)
+            }
+        })
+    }
+
+    function edit() {
+        /*dto 넘겨서 rno 받음*/
+    }
+    function del(rno) {
+        /*rno넘기고 String 받음*/
+        $.ajax({
+            url : `/reply/delete/${rno}`,
+            type : "get",
+            success : function (data) {
+                alert(data)
+                location.href=`/board/read/${bno}`
             }
         })
     }
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

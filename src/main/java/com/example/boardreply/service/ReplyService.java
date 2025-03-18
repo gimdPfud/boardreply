@@ -5,28 +5,32 @@ import com.example.boardreply.entity.Reply;
 import com.example.boardreply.repository.BoardRepository;
 import com.example.boardreply.repository.ReplyRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@ToString
 @Service
 @Log4j2
 @RequiredArgsConstructor
 @Transactional
 public class ReplyService {
     private final ReplyRepository replyRepository;
-    private final ModelMapper modelMapper;
+    private final ModelMapper modelMapper = new ModelMapper();
     private final BoardRepository boardRepository;
 
     public void register(ReplyDTO replyDTO){
-        log.info("들어온 값 : "+replyDTO);
+//        log.info(replyDTO);
         Reply reply = modelMapper.map(replyDTO, Reply.class);
+//        log.info(reply);
+        reply.setBoard(boardRepository.findById(replyDTO.getBno()).get());
         reply.setRegitime(LocalDateTime.now());
         replyRepository.save(reply);
     }
