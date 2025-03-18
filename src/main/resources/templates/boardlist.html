@@ -18,7 +18,7 @@
             <th>제목</th>
             <th>작성자</th>
             <th>등록시간</th>
-            <th>관리</th>
+
         </tr>
         </thead>
         <tbody>
@@ -26,11 +26,7 @@
             <td th:text="${board.bno}"></td>
             <td><a th:href="@{/board/read/{bno}(bno=${board.bno})}" th:text="${board.title}"></a></td>
             <td th:text="${board.writer}"></td>
-            <td th:text="${board.regitime}"></td>
-            <td>
-                <a th:href="@{/board/edit/{bno}(bno=${board.bno})}" class="btn btn-sm btn-warning">수정</a>
-                <a th:href="@{/board/delete(bno=${board.bno})}" class="btn btn-sm btn-danger" onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
-            </td>
+            <td th:text="${#temporals.format(board.regitime, 'yyyy-MM-dd HH:mm')}"></td>
         </tr>
         </tbody>
     </table>

@@ -1,9 +1,6 @@
 package com.example.boardreply.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -23,8 +20,10 @@ public class Board {
 
     private String title;
 
+    @Column(length = 2000)
     private String content;
 
+    @Column(length = 20)
     private String writer;
 
     private LocalDateTime regitime;

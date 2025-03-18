@@ -19,6 +19,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/board")
+@Log4j2
 public class BoardController {
 
     private final BoardService boardService;
@@ -48,7 +49,6 @@ public class BoardController {
 
     @GetMapping("/read/{bno}")
     public String getRead(@PathVariable("bno") Long bno, Model model){
-
         BoardDTO boardDTO = boardService.read(bno);
         model.addAttribute("boardDTO", boardDTO);
 
@@ -74,10 +74,10 @@ public class BoardController {
     }
 
     @GetMapping("/delete")
-    public String postDelete(Long bno){
+    public String getDelete(Long bno){
 
         boardService.delete(bno);
 
-        return "redirect:/boardlist";
+        return "redirect:/board/list";
     }
 }
