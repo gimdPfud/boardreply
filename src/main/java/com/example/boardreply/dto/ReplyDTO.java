@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+//@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReplyDTO {
@@ -15,5 +16,7 @@ public class ReplyDTO {
     private String content;
     private String writer;
     private LocalDateTime regitime;
-    private BoardDTO boardDTO;
+
+//    private Board board;
+    private Long bno;
 }

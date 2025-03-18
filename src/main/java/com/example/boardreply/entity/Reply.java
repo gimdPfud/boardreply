@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @Getter
 @ToString
 @NoArgsConstructor
+//@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
 public class Reply {
