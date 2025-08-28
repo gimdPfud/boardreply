@@ -6,12 +6,9 @@
 ⚙️ 개발 환경
 
 Java 17
-
-Spring Boot 3.3
-
-MySQL 8.0
-
-HTML, CSS, JavaScript
+Spring Boot
+MariaDB
+HTML
 
 🚀 주요 기능
 
