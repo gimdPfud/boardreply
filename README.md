@@ -1,16 +1,28 @@
-📝 BoardReply Project
+📝 BoardReply - 댓글 기능이 있는 게시판
+📋 프로젝트 개요
+학원에서 배운 Spring Boot를 활용하여 제작한 게시판 프로젝트입니다.
 
-사용자가 게시글을 작성하고 댓글을 달 수 있는 간단한 게시판 프로젝트입니다.
-2인 1조로 진행했으며, 작업 기간은 1일입니다.
+프로젝트명: BoardReply (댓글 기능이 있는 게시판)
+개발 형태: 2인 1조 팀 프로젝트
+개발 기간: 1일
+목적: Spring Boot 학습 및 실습
 
-⚙️ 개발 환경
+🛠️ 기술 스택
 
-Java 17
-Spring Boot
-MariaDB
-HTML
+Backend: Spring Boot
+Language: Java 17
+Database: MariaDB
+Frontend: HTML
 
 🚀 주요 기능
+게시글 관리 (CRUD)
 
-게시글 작성, 조회, 수정, 삭제 (CRUD)
-댓글 작성 및 삭제
+✅ 게시글 작성
+✅ 게시글 조회
+✅ 게시글 수정
+✅ 게시글 삭제
+
+댓글 기능
+
+✅ 댓글 작성
+✅ 댓글 삭제
